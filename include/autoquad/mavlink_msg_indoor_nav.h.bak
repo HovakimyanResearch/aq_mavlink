@@ -1,0 +1,500 @@
+// MESSAGE INDOOR NAVIGATION COORDINATE PACKING
+
+#define MAVLINK_MSG_ID_EXT_GPS 168
+
+typedef struct __mavlink_indoor_nav_coord_t
+{
+        double value1; ///< value1
+        double value2; ///< value2
+        float value3; ///< value3
+        float value4; ///< value4
+        float value5; ///< value5
+        float value6; ///< value6
+        float value7; ///< value7
+        float value8; ///< value8
+        float value9; ///< value9
+        float value10; ///< value10
+        uint16_t command; ///< Command ID, as defined by MAV_CMD enum.
+        uint8_t target_system; ///< System which should execute the command
+        uint8_t target_component; ///< Component which should execute the command, 0 for all components
+        uint8_t confirmation; ///< 0: First transmission of this command. 1-255: Confirmation transmissions (e.g. for kill command)
+} mavlink_indoor_nav_coord_t;
+
+#define MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN 53
+#define MAVLINK_MSG_ID_168_LEN 53
+
+#define MAVLINK_MSG_ID_INDOOR_NAV_COORD_CRC 196
+#define MAVLINK_MSG_ID_168_CRC 196
+
+
+
+#define MAVLINK_MESSAGE_INFO_INDOOR_NAVIGATION_COOR { \
+	"INDOOR_NAVIGATION_COOR", \
+    14, \
+    {  { "value1", NULL, MAVLINK_TYPE_DOUBLE, 0, 0, offsetof(mavlink_indoor_nav_coord_t, value1) }, \
+       { "value2", NULL, MAVLINK_TYPE_DOUBLE, 0, 8, offsetof(mavlink_indoor_nav_coord_t, value2) }, \
+       { "value3", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_indoor_nav_coord_t, value3) }, \
+       { "value4", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_indoor_nav_coord_t, value4) }, \
+       { "value5", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_indoor_nav_coord_t, value5) }, \
+       { "value6", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_indoor_nav_coord_t, value6) }, \
+       { "value7", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_indoor_nav_coord_t, value7) }, \
+       { "value8", NULL, MAVLINK_TYPE_FLOAT, 0, 36, offsetof(mavlink_indoor_nav_coord_t, value8) }, \
+       { "value9", NULL, MAVLINK_TYPE_FLOAT, 0, 40, offsetof(mavlink_indoor_nav_coord_t, value9) }, \
+       { "value10", NULL, MAVLINK_TYPE_FLOAT, 0, 44, offsetof(mavlink_indoor_nav_coord_t, value10) }, \
+       { "command", NULL, MAVLINK_TYPE_UINT16_T, 0, 48, offsetof(mavlink_indoor_nav_coord_t, command) }, \
+       { "target_system", NULL, MAVLINK_TYPE_UINT8_T, 0, 50, offsetof(mavlink_indoor_nav_coord_t, target_system) }, \
+       { "target_component", NULL, MAVLINK_TYPE_UINT8_T, 0, 51, offsetof(mavlink_indoor_nav_coord_t, target_component) }, \
+       { "confirmation", NULL, MAVLINK_TYPE_UINT8_T, 0, 52, offsetof(mavlink_indoor_nav_coord_t, confirmation) }, \
+       } \
+}
+
+
+/**
+ * @brief Pack a indoor_nav_coord message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param value1 value1
+ * @param value2 value2
+ * @param value3 value3
+ * @param value4 value7
+ * @param value5 value8
+ * @param value6 value9
+ * @param value7 value10
+ * @param value8 value11
+ * @param value9 value12
+ * @param value10 value10
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_indoor_nav_coord_pack(
+       uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+       uint8_t target_system, uint8_t target_component, uint16_t command, 
+       uint8_t confirmation, double value1, double value2, float value3, 
+       float value4, float value5, float value6, float value7, float value8, 
+       float value9, float value10)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+	char buf[MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN];
+	_mav_put_double(buf, 0, value1);
+	_mav_put_double(buf, 8, value2);
+	_mav_put_float(buf, 16, value3);
+	_mav_put_float(buf, 20, value4);
+	_mav_put_float(buf, 24, value5);
+	_mav_put_float(buf, 28, value6);
+	_mav_put_float(buf, 32, value7);
+	_mav_put_float(buf, 36, value8);
+	_mav_put_float(buf, 40, value9);
+	_mav_put_float(buf, 44, value10);
+        _mav_put_uint16_t(buf, 48, command);
+        _mav_put_uint8_t(buf, 50, target_system);
+        _mav_put_uint8_t(buf, 51, target_component);
+        _mav_put_uint8_t(buf, 52, confirmation);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, 
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#else
+	mavlink_indoor_nav_coord_t packet;
+	packet.value1 = value1;
+	packet.value2 = value2;
+	packet.value3 = value3;
+	packet.value4 = value4;
+	packet.value5 = value5;
+	packet.value6 = value6;
+	packet.value7 = value7;
+	packet.value8 = value8;
+	packet.value9 = value9;
+	packet.value10 = value10;
+        packet.command = command;
+        packet.target_system = target_system;
+        packet.target_component = target_component;
+        packet.confirmation = confirmation;
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, 
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+
+	msg->msgid = MAVLINK_MSG_ID_EXT_GPS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message(msg, system_id, component_id, 
+                                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN, 
+                                MAVLINK_MSG_ID_INDOOR_NAV_COORD_CRC);
+#else
+    return mavlink_finalize_message(msg, system_id, component_id, 
+                                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+}
+
+/**
+ * @brief Pack a indoor_nav_coord message on a channel
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param chan The MAVLink channel this message will be sent over
+ * @param msg The MAVLink message to compress the data into
+ * @param value1 value1
+ * @param value2 value2
+ * @param value3 value3
+ * @param value4 value4
+ * @param value5 value5
+ * @param value6 value6
+ * @param value7 value7
+ * @param value8 value8
+ * @param value9 value9
+ * @param value10 value10
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_indoor_nav_coord_pack_chan(uint8_t system_id, 
+                uint8_t component_id, uint8_t chan, mavlink_message_t* msg,
+                uint8_t target_system,uint8_t target_component,uint16_t command,
+                uint8_t confirmation, double value1, double value2, 
+                float value3, float value4, float value5, float value6, 
+                float value7, float value8, float value9, float value10)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+	char buf[MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN];
+        _mav_put_double(buf, 0, value1);
+        _mav_put_double(buf, 8, value2);
+        _mav_put_float(buf, 16, value3);
+        _mav_put_float(buf, 20, value4);
+        _mav_put_float(buf, 24, value5);
+        _mav_put_float(buf, 28, value6);
+        _mav_put_float(buf, 32, value7);
+        _mav_put_float(buf, 36, value8);
+        _mav_put_float(buf, 40, value9);
+        _mav_put_float(buf, 44, value10);
+        _mav_put_uint16_t(buf, 48, command);
+        _mav_put_uint8_t(buf, 50, target_system);
+        _mav_put_uint8_t(buf, 51, target_component);
+        _mav_put_uint8_t(buf, 52, confirmation);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, 
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#else
+	mavlink_indoor_nav_coord_t packet;
+	packet.value1 = value1;
+	packet.value2 = value2;
+	packet.value3 = value3;
+	packet.value4 = value4;
+	packet.value5 = value5;
+	packet.value6 = value6;
+	packet.value7 = value7;
+	packet.value8 = value8;
+	packet.value9 = value9;
+	packet.value10 = value10;
+        packet.command = command;
+        packet.target_system = target_system;
+        packet.target_component = target_component;
+        packet.confirmation = confirmation;
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, 
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+
+	msg->msgid = MAVLINK_MSG_ID_EXT_GPS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, 
+                        MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN, 
+                        MAVLINK_MSG_ID_INDOOR_NAV_COORD_CRC);
+#else
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, 
+                        MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+}
+
+/**
+ * @brief Encode a indoor_nav_coord struct
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param msg The MAVLink message to compress the data into
+ * @param indoor_nav_coord C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_indoor_nav_coord_encode(
+        uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, 
+        const mavlink_indoor_nav_coord_t* i)
+{
+    return mavlink_msg_indoor_nav_coord_pack(
+        system_id, component_id, msg, i->target_system, 
+        i->target_component, i->command, i->confirmation, i->value1, i->value2,
+        i->value3, i->value4, i->value5, i->value6, i->value7, i->value8, 
+        i->value9, i->value10);
+}
+
+/**
+ * @brief Encode a indoor_nav_coord struct on a channel
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param chan The MAVLink channel this message will be sent over
+ * @param msg The MAVLink message to compress the data into
+ * @param indoor_nav_coord C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_i_encode_chan(
+        uint8_t system_id, uint8_t component_id, uint8_t chan, 
+        mavlink_message_t* msg, const mavlink_i_t* i)
+{
+    return mavlink_i_pack_chan(system_id, component_id, chan, msg, 
+            i->target_system, i->target_component, i->command, i->confirmation,
+            i->value1, i->value2, i->value3, i->value4, i->value5, i->value6, 
+            i->value7, i->value8, i->value9, i->value10);
+}
+
+/**
+ * @brief Send a indoor_nav_coord message
+ * @param chan MAVLink channel to send the message
+ *
+ * @param value1 value1
+ * @param value2 value2
+ * @param value3 value3
+ * @param value4 value4
+ * @param value5 value5
+ * @param value6 value6
+ * @param value7 value7
+ * @param value8 value8
+ * @param value9 value9
+ * @param value10 value10
+ */
+#ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
+
+static inline void mavlink_msg_indoor_nav_coord_send(
+        mavlink_channel_t chan, uint8_t target_system, uint8_t target_component,
+        uint16_t command, uint8_t confirmation, double value1, double value2, 
+        float value3, float value4, float value5, float value6, 
+        float value7, float value8, float value9, float value10)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+	char buf[MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN];
+        _mav_put_double(buf, 0, value1);
+        _mav_put_double(buf, 8, value2);
+        _mav_put_float(buf, 16, value3);
+        _mav_put_float(buf, 20, value4);
+        _mav_put_float(buf, 24, value5);
+        _mav_put_float(buf, 28, value6);
+        _mav_put_float(buf, 32, value7);
+        _mav_put_float(buf, 36, value8);
+        _mav_put_float(buf, 40, value9);
+        _mav_put_float(buf, 44, value10);
+        _mav_put_uint16_t(buf, 48, command);
+        _mav_put_uint8_t(buf, 50, target_system);
+        _mav_put_uint8_t(buf, 51, target_component);
+        _mav_put_uint8_t(buf, 52, confirmation);
+
+#if MAVLINK_CRC_EXTRA
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXT_GPS, buf,
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN, 
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_CRC);
+#else
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXT_GPS, buf,
+                MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+#else
+	mavlink_indoor_nav_coord_t packet;
+	packet.value1 = value1;
+	packet.value2 = value2;
+	packet.value3 = value3;
+	packet.value4 = value4;
+	packet.value5 = value5;
+	packet.value6 = value6;
+	packet.value7 = value7;
+	packet.value8 = value8;
+	packet.value9 = value9;
+	packet.value10 = value10;
+        packet.command = command;
+        packet.target_system = target_system;
+        packet.target_component = target_component;
+        packet.confirmation = confirmation;
+
+#if MAVLINK_CRC_EXTRA
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXT_GPS, 
+        (const char *)&packet, MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN, 
+        MAVLINK_MSG_ID_INDOOR_NAV_COORD_CRC);
+#else
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXT_GPS, 
+        (const char *)&packet, MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+#endif
+}
+
+#endif
+
+// MESSAGE INDOOR_NAV_COORD UNPACKING
+
+
+/**
+ * @brief Get field confirmation from indoor navigation message
+ *
+ * @return 0: First transmission of this command. 1-255: Confirmation transmissions (e.g. for kill command)
+ */
+static inline uint8_t mavlink_msg_indoor_nav_coord_get_confirmation(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  52);
+}
+
+/**
+ * @brief Get field target_component from indoor navigation message
+ *
+ * @return Component which should execute the command, 0 for all components
+ */
+static inline uint8_t 
+mavlink_msg_indoor_nav_coord_get_target_component(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  51);
+}
+
+/**
+ * @brief Get field target_system from indoor navigation message
+ *
+ * @return System which should execute the command
+ */
+static inline uint8_t 
+mavlink_msg_indoor_nav_coord_target_system(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  50);
+}
+
+/**
+ * @brief Get field command from indoor navigation message
+ *
+ * @return Command ID, as defined by MAV_CMD enum.
+ */
+static inline uint16_t 
+mavlink_msg_indoor_nav_coord_get_command(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint16_t(msg,  48);
+}
+
+/**
+ * @brief Get field value1double from indoor_nav_coord message
+ *
+ * @return value1
+ */
+static inline double 
+mavlink_msg_indoor_nav_coord_get_value1(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_double(msg,  0);
+}
+
+/**
+ * @brief Get field value2 from indoor_nav_coord message
+ *
+ * @return value2
+ */
+static inline double 
+mavlink_msg_indoor_nav_coord_get_value2(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_double(msg,  8);
+}
+
+/**
+ * @brief Get field value3 from indoor_nav_coord message
+ *
+ * @return value3
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value3(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  16);
+}
+
+/**
+ * @brief Get field value4 from indoor_nav_coord message
+ *
+ * @return value4
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value4(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  20);
+}
+
+/**
+ * @brief Get field value5float from indoor_nav_coord message
+ *
+ * @return value5
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value5(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  24);
+}
+
+/**
+ * @brief Get field value6 from indoor_nav_coord message
+ *
+ * @return value6
+ */
+static inline float
+mavlink_msg_indoor_nav_coord_get_value6(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  28);
+}
+
+/**
+ * @brief Get field value7 from indoor_nav_coord message
+ *
+ * @return value7
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value7(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  32);
+}
+
+/**
+ * @brief Get field value8 from indoor_nav_coord message
+ *
+ * @return value8
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value8(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  36);
+}
+
+/**
+ * @brief Get field value9 from indoor_nav_coord message
+ *
+ * @return value9
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value9(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  40);
+}
+
+/**
+ * @brief Get field value10 from indoor_nav_coord message
+ *
+ * @return value10
+ */
+static inline float 
+mavlink_msg_indoor_nav_coord_get_value10(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  44);
+}
+
+/**
+ * @brief Decode a indoor_nav_coord message into a struct
+ *
+ * @param msg The message to decode
+ * @param indoor_nav_coord C-struct to decode the message contents into
+ */
+static inline void 
+mavlink_msg_indoor_nav_coord_decode(const mavlink_message_t* msg, 
+                        mavlink_indoor_nav_coord_t* indoor_nav_coord)
+{
+#if MAVLINK_NEED_BYTE_SWAP
+	indoor_nav_coord->value1 = mavlink_msg_indoor_nav_coord_get_value1(msg);
+	indoor_nav_coord->value2 = mavlink_msg_indoor_nav_coord_get_value2(msg);
+	indoor_nav_coord->value3 = mavlink_msg_indoor_nav_coord_get_value3(msg);
+	indoor_nav_coord->value4 = mavlink_msg_indoor_nav_coord_get_value4(msg);
+	indoor_nav_coord->value5 = mavlink_msg_indoor_nav_coord_get_value5(msg);
+	indoor_nav_coord->value6 = mavlink_msg_indoor_nav_coord_get_value6(msg);
+	indoor_nav_coord->value7 = mavlink_msg_indoor_nav_coord_get_value7(msg);
+	indoor_nav_coord->value8 = mavlink_msg_indoor_nav_coord_get_value8(msg);
+	indoor_nav_coord->value9 = mavlink_msg_indoor_nav_coord_get_value9(msg);
+	indoor_nav_coord->value10 = mavlink_msg_indoor_nav_coord_get_value10(msg);
+        indoor_nav_coord->command = mavlink_msg_indoor_nav_coord_get_command(msg);
+        indoor_nav_coord->target_system = mavlink_indoor_nav_coord_long_get_target_system(msg);
+        indoor_nav_coord->target_component = mavlink_indoor_nav_coord_long_get_target_component(msg);
+        indoor_nav_coord->confirmation = mavlink_msg_indoor_nav_coord_get_confirmation(msg);
+#else
+	memcpy(indoor_nav_coord, _MAV_PAYLOAD(msg), MAVLINK_MSG_ID_INDOOR_NAV_COORD_LEN);
+#endif
+}
